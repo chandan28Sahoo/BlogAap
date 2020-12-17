@@ -7,6 +7,28 @@ const unique = require("objection-unique")({
     identifiers: ["id"],
 });
 
+class users extends unique(Model) {
+    // Table name is the only required property.
+    static get tableName() {
+        return "users";
+    }
+    static get jsonSchema() {
+        return {
+            type: "object",
+            required: ["email"],
+
+            properties: {
+                id: { type: "integer" },
+                fname: { type: "string" },
+                username: { type: "string" },
+                email: { type: "string" },
+                phone_no: { type: "string" },
+                password: { type: "string" },
+            },
+        };
+    }
+}
+
 class blog extends unique(Model) {
     // Table name is the only required property.
     static get tableName() {
@@ -87,26 +109,6 @@ class like_dislike_comment extends unique(Model) {
     }
 }
 
-class users extends unique(Model) {
-    // Table name is the only required property.
-    static get tableName() {
-        return "users";
-    }
-    static get jsonSchema() {
-        return {
-            type: "object",
-            required: ["email"],
 
-            properties: {
-                id: { type: "integer" },
-                fname: { type: "string" },
-                username: { type: "string" },
-                email: { type: "string" },
-                phone_no: { type: "string" },
-                password: { type: "string" },
-            },
-        };
-    }
-}
 
 module.exports = { users, blog, like_dislike_comment };
